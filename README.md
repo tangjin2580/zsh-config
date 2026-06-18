@@ -14,32 +14,33 @@ macOS zsh 全套配置，一键恢复开发环境。
 | tldr | tealdeer 中文版 |
 | 命令纠错 | thefuck |
 | 目录跳转 | z、dirhistory |
+| 文件夹备注 | cd 目录自动显示 `.notes` |
 | 剪贴板 | copypath、copyfile |
 | Homebrew | `Brewfile` 一键安装所有包 |
 
 ## 重装系统后恢复
 
 ```bash
-# 1. 克隆配置
 git clone git@github.com:tangjin2580/zsh-config.git ~/dotfiles
-
-# 2. 安装
 bash ~/dotfiles/install.sh
 ```
 
 ## 日常维护
 
-修改配置后同步到 GitHub：
+只需记一个命令：**`dotfiles`**
 
 ```bash
-cd ~/dotfiles
-git add -A
-git commit -m "update: 描述你的改动"
-git push
+dotfiles push "改了xxx"   # 提交并推送到 GitHub
+dotfiles pull             # 从 GitHub 拉取最新配置
+dotfiles edit             # 编辑 .zshrc
+dotfiles status           # 查看改动
+dotfiles log              # 查看提交历史
 ```
 
-在新机器上拉取最新配置：
+## 文件夹备注
 
 ```bash
-cd ~/dotfiles && git pull
+note "Python 项目"        # 给当前目录写备注
+cd ~/project              # 进入目录自动显示：📁 project: Python 项目
+note                      # 查看当前目录备注
 ```
