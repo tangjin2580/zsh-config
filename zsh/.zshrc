@@ -95,6 +95,19 @@ alias grep='grep --color=auto'
 alias ip='curl -s https://ifconfig.me && echo'
 
 # ==============================
+# dotfiles 管理命令
+# ==============================
+dotfiles() {
+    case "${1:-}" in
+        push)   cd ~/dotfiles && git add -A && git commit -m "${2:-update}" && git push ;;
+        pull)   cd ~/dotfiles && git pull ;;
+        edit)   ${EDITOR:-vim} ~/dotfiles/zsh/.zshrc ;;
+        status) cd ~/dotfiles && git status ;;
+        log)    cd ~/dotfiles && git log --oneline -10 ;;
+        *)      echo "用法: dotfiles {push|pull|edit|status|log} [commit信息]" ;;
+    esac
+}
+# ==============================
 # 文件夹备注（cd 进入目录时自动显示 .notes 文件内容）
 # ==============================
 autoload -Uz add-zsh-hook
