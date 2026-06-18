@@ -95,6 +95,25 @@ alias grep='grep --color=auto'
 alias ip='curl -s https://ifconfig.me && echo'
 
 # ==============================
+# 文件夹备注（cd 进入目录时自动显示 .notes 文件内容）
+# ==============================
+autoload -Uz add-zsh-hook
+chpwd_show_note() {
+    if [[ -f .notes ]]; then
+        printf '\033[33m📁 %s:\033[0m \033[36m%s\033[0m\n' "$(basename "$PWD")" "$(head -1 .notes)"
+    fi
+}
+add-zsh-hook chpwd chpwd_show_note
+
+note() {
+    if [[ -z "$1" ]]; then
+        cat .notes 2>/dev/null || echo "用法: note '你的备注'"
+    else
+        echo "$1" > .notes && echo "✓ 备注已保存: $1"
+    fi
+}
+
+# ==============================
 # tldr 中文别名（tealdeer）
 # ==============================
 alias tldr='tldr -L zh'
