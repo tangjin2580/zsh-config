@@ -15,8 +15,8 @@ brew bundle --file="$DOTFILES/Brewfile"
 echo ""
 echo "==> 2/4 创建配置软链接..."
 ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
-mkdir -p "$HOME/.config/tealdeer"
-ln -sf "$DOTFILES/tealdeer/config.toml" "$HOME/.config/tealdeer/config.toml"
+mkdir -p "$HOME/Library/Application Support/tealdeer"
+ln -sf "$DOTFILES/tealdeer/config.toml" "$HOME/Library/Application Support/tealdeer/config.toml"
 
 echo ""
 echo "==> 3/4 启动守护进程..."
@@ -25,9 +25,9 @@ if command -v atuin &>/dev/null; then
 fi
 
 echo ""
-echo "==> 4/4 下载 tldr 中文缓存..."
+echo "==> 4/4 下载 tldr 页面缓存（中/英）..."
 if command -v tldr &>/dev/null; then
-    LANG=zh_CN.UTF-8 tldr --update
+    tldr --update
 fi
 
 echo ""
