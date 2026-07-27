@@ -129,8 +129,33 @@ note() {
 # ==============================
 # tldr 中文别名（tealdeer）
 # ==============================
-alias tldr='tldr -L zh'
-alias tldr-update='LANG=zh_CN.UTF-8 tldr --update'
+alias tldr='tldr --language zh'
+alias tldr-update='tldr --update'
+
+# ==============================
+# 端口查询工具
+# ==============================
+# 查看指定端口的监听进程（用法：listen 5128）
+listen() {
+    lsof -nP -iTCP:"$1" -sTCP:LISTEN
+}
+# 列出本机所有监听端口（用法：openports）
+openports() {
+    lsof -nP -iTCP -sTCP:LISTEN
+}
+# 杀掉监听指定端口的进程（用法：killport 5128；强制：killport -9 5128）
+killport() {
+    local sig="" port="$1"
+    [[ "$1" == "-9" || "$1" == "-KILL" ]] && { sig="-9"; port="$2"; }
+    local pid
+    pid=$(lsof -tiTCP:"$port" -sTCP:LISTEN -nP)
+    if [[ -n "$pid" ]]; then
+        echo "→ 终止监听端口 $port 的进程 PID: $pid"
+        kill $sig $pid
+    else
+        echo "✗ 没有进程监听端口 $port"
+    fi
+}
 
 # ==============================
 # x-cmd 工具
@@ -138,6 +163,7 @@ alias tldr-update='LANG=zh_CN.UTF-8 tldr --update'
 if [[ -f "$HOME/.x-cmd.root/X" ]]; then
     . "$HOME/.x-cmd.root/X" &>/dev/null
     alias x="___x_cmd"
+    alias c='x cd'
 fi
 
 # ==============================
@@ -164,3 +190,6 @@ autoload -Uz compinit && compinit -u
 # ==============================
 export PATH="$HOME/.dotnet:$PATH"
 export PATH="$HOME/.mavis/bin:$PATH"
+
+# Added by MiniMax Code
+export PATH="/Users/Mr.li/.mavis/bin:$PATH"
