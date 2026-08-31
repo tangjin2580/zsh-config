@@ -6,10 +6,10 @@ if [[ $- != *i* ]]; then
 fi
 
 # ==============================
-# PATH 配置（Homebrew 优先）
+# PATH 配置
 # ==============================
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+# Homebrew 与 ~/.local/bin 已由 ~/.zprofile 统一设置，此处不再重复 export。
+# 去重由 ~/.zshenv 的 `typeset -U path PATH` 保证。
 
 # ==============================
 # fzf 模糊搜索（Ctrl+T 搜文件、Alt+C 跳目录）
@@ -188,8 +188,30 @@ autoload -Uz compinit && compinit -u
 # ==============================
 # 其他 PATH
 # ==============================
-export PATH="$HOME/.dotnet:$PATH"
-export PATH="$HOME/.mavis/bin:$PATH"
+# ~/.dotnet 已在 ~/.zprofile 设置。
+# ~/.mavis/bin 原先被 MiniMax 工具重复写入两次，这里合并为一次。
+path=("$HOME/.mavis/bin" $path)
 
-# Added by MiniMax Code
-export PATH="/Users/Mr.li/.mavis/bin:$PATH"
+# bun completions
+[ -s "/Users/Mr.li/.bun/_bun" ] && source "/Users/Mr.li/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ==============================
+# 中文 man 手册（man-pages-zh，装在 /opt/homebrew/share/man/zh_CN）
+# 用法：cman <命令>   例：cman ls
+# 说明：仅在调用时把 LANG 切到 zh_CN.UTF-8，不影响全局会话；
+#       MANPATH 末尾的冒号表示追加系统默认 man 路径，作为英文回退；
+#       显式带上 /opt/homebrew/share/man 让 Homebrew 命令（如 git）的
+#       英文页也能回退。若想让 `man` 默认显示中文，可加 alias man='cman'。
+# ==============================
+cman() {
+    LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
+    MANPATH=/opt/homebrew/share/man/zh_CN:/opt/homebrew/share/man: \
+    command man "$@"
+}
+
+# 让 `man` 默认显示中文（有中文页用中文，没有则回退英文）
+alias man='cman'
