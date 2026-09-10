@@ -12,6 +12,7 @@ macOS zsh 全套配置，一键恢复开发环境。
 | 语法高亮 | zsh-syntax-highlighting |
 | 自动建议 | zsh-autosuggestions (→ 补全) |
 | tldr | tealdeer 中文版 |
+| 中文 man | man-pages-zh（`cman ls` 看中文手册，`man` 默认中文） |
 | 命令纠错 | thefuck |
 | 目录跳转 | z、dirhistory |
 | 文件夹备注 | cd 目录自动显示 `.notes` |
@@ -24,6 +25,11 @@ macOS zsh 全套配置，一键恢复开发环境。
 git clone git@github.com:tangjin2580/zsh-config.git ~/dotfiles
 bash ~/dotfiles/install.sh
 ```
+
+> 中文 man 手册由 `install-man-zh.sh` 单独负责（从 codeload 拉取
+> man-pages-zh 源码编译安装到 `$(brew --prefix)/share/man/zh_CN`）。
+> 重装时 `install.sh` 第 5 步会自动调用它；也可单独运行：
+> `bash ~/dotfiles/install-man-zh.sh`（FORCE=1 强制重装）。
 
 ## 日常维护
 
