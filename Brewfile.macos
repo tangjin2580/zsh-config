@@ -1,0 +1,48 @@
+# macOS 专属依赖（跨平台公共部分见 Brewfile）
+# 由 install.sh 仅在 $(uname) == Darwin 时通过 brew bundle --file=Brewfile.macos 安装
+# —— 不放在 Brewfile 里，是因为 cask 与部分 formula 在 Linux 上会导致 brew bundle 报错。
+
+# ---- macOS-only formulae ----
+# Utility to configure multi-display resolutions and arrangements
+brew "displayplacer"
+# Apple Silicon Monitor Top written in Go Lang
+brew "mactop"
+# Tool for managing apps on iOS devices
+brew "ideviceinstaller"
+
+# ---- casks ----
+# Android SDK component
+cask "android-platform-tools"
+# PHP and Web development environment manager
+cask "flyenv"
+cask "font-fira-code-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Cross-platform Git credential storage for multiple hosting providers
+cask "git-credential-manager"
+# Music app base on Electron & Vue
+cask "lx-music"
+# File system integration
+cask "macfuse"
+# Graphical user interface for the command terminal
+cask "macpilot"
+# Re-mounts write-protected NTFS volumes
+cask "mounty"
+# Quick Look plug-in that renders source code with syntax highlighting
+cask "qlcolorcode"
+# Quick Look generator for Markdown files
+cask "qlmarkdown"
+# Quick Look plugin for JSON files
+cask "quicklook-json"
+# A lightweight and high-performance screen recorder for macOS.
+cask "quickrecorder"
+# Standalone client for sing-box, the universal proxy platform
+cask "sfm"
+# Manage Homebrew packages with a UI
+cask "wailbrew"
+# Your entire server infrastructure at your fingertips
+cask "xpipe-io/tap/xpipe"
+
+# ---- VS Code 扩展（macOS 上用 brew 管理的 code 安装）----
+vscode "ms-ceintl.vscode-language-pack-zh-hans"
+vscode "ms-vscode.makefile-tools"

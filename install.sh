@@ -11,6 +11,10 @@ if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 brew bundle --file="$DOTFILES/Brewfile"
+# macOS 专属依赖（cask / 部分 formula / vscode 扩展在 Linux 上 brew bundle 会报错，仅 Darwin 运行）
+if [ "$(uname)" = "Darwin" ]; then
+    brew bundle --file="$DOTFILES/Brewfile.macos"
+fi
 
 echo ""
 echo "==> 2/5 创建配置软链接..."

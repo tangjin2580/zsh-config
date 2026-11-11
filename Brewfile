@@ -36,8 +36,6 @@ brew "autojump"
 brew "brotli"
 # Concurrent, cache-efficient, and Dockerfile-agnostic builder toolkit
 brew "buildkit"
-# Utility to configure multi-display resolutions and arrangements
-brew "displayplacer"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
@@ -48,12 +46,8 @@ brew "gh"
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Tool for managing apps on iOS devices
-brew "ideviceinstaller"
 # Update of iperf: measures TCP, UDP, and SCTP bandwidth
 brew "iperf3"
-# Apple Silicon Monitor Top written in Go Lang
-brew "mactop"
 # Run a Kubernetes cluster locally
 brew "minikube"
 # Media player based on MPlayer and mplayer2
@@ -98,39 +92,11 @@ brew "wget"
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# Android SDK component
-cask "android-platform-tools"
-# PHP and Web development environment manager
-cask "flyenv"
-cask "font-fira-code-nerd-font"
-# Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
-# Cross-platform Git credential storage for multiple hosting providers
-cask "git-credential-manager"
-# Music app base on Electron & Vue
-cask "lx-music"
-# File system integration
-cask "macfuse"
-# Graphical user interface for the command terminal
-cask "macpilot"
-# Re-mounts write-protected NTFS volumes
-cask "mounty"
-# Quick Look plug-in that renders source code with syntax highlighting
-cask "qlcolorcode"
-# Quick Look generator for Markdown files
-cask "qlmarkdown"
-# Quick Look plugin for JSON files
-cask "quicklook-json"
-# A lightweight and high-performance screen recorder for macOS.
-cask "quickrecorder"
-# Standalone client for sing-box, the universal proxy platform
-cask "sfm"
-# Manage Homebrew packages with a UI
-cask "wailbrew"
-# Your entire server infrastructure at your fingertips
-cask "xpipe-io/tap/xpipe"
-vscode "ms-ceintl.vscode-language-pack-zh-hans"
-vscode "ms-vscode.makefile-tools"
+# Shell extension to jump to frequently used directories（zoxide，替代原 x-cmd 的 c 跳转）
+brew "zoxide"
+# Cross-shell prompt engine（oh-my-posh 主题）
+brew "oh-my-posh"
+
 go "github.com/go-delve/delve/cmd/dlv"
 go "unlock-music.dev/cli/cmd/um"
 npm "@vue/cli"
