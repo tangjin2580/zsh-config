@@ -208,16 +208,24 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # ==============================
-# 中文 man 手册（man-pages-zh，装在 $HOMEBREW_PREFIX/share/man/zh_CN）
+# 中文 man 手册（man-pages-zh）
 # 用法：cman <命令>   例：cman ls
-# 说明：仅在调用时把 LANG 切到 zh_CN.UTF-8，不影响全局会话；
-#       MANPATH 末尾的冒号表示追加系统默认 man 路径，作为英文回退；
-#       显式带上 $HOMEBREW_PREFIX/share/man 让 Homebrew 命令（如 git）的
-#       英文页也能回退。若想让 `man` 默认显示中文，可加 alias man='cman'。
+# 跨平台：按系统探测中文 man 路径——
+#   macOS：Homebrew 装的 man-pages-zh，在 $HOMEBREW_PREFIX/share/man/zh_CN
+#   Linux：apt 的 manpages-zh，在 /usr/share/man/zh_CN
+# 仅调用时把 LANG 切到 zh_CN.UTF-8，不影响全局会话；
+# MANPATH 末尾的冒号表示追加系统默认 man 路径，作为英文回退。
+# 想让 `man` 默认显示中文，可保持下方 alias man='cman'。
 # ==============================
 cman() {
+    local mp=""
+    # 中文 man 目录（存在才加入，避免无效路径）
+    [ -d "$HOMEBREW_PREFIX/share/man/zh_CN" ] && mp="$HOMEBREW_PREFIX/share/man/zh_CN"
+    [ -d /usr/share/man/zh_CN ] && mp="${mp:+$mp:}/usr/share/man/zh_CN"
+    # Homebrew 命令（git/node 等）的英文 man 页，存在也一并加入
+    [ -d "$HOMEBREW_PREFIX/share/man" ] && mp="${mp:+$mp:}$HOMEBREW_PREFIX/share/man"
     LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
-    MANPATH=$HOMEBREW_PREFIX/share/man/zh_CN:$HOMEBREW_PREFIX/share/man: \
+    MANPATH="${mp:+$mp:}" \
     command man "$@"
 }
 
