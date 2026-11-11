@@ -25,7 +25,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(
     git
-    z                       # 智能跳转目录
     extract                 # 解压各种压缩文件
     colored-man-pages       # 彩色 man 文档
     command-not-found       # 未找到命令提示安装
@@ -158,12 +157,21 @@ killport() {
 }
 
 # ==============================
-# x-cmd 工具
+# zoxide：基于 frecency 的目录跳转（替代原先不可靠的 x-cmd c）
+# 每次 cd / 任意方式切目录都会被自动记录，c 关键词即可模糊跳回
+# ==============================
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
+
+# ==============================
+# x-cmd 工具（保留 x 命令本身，c 已改映射 zoxide）
 # ==============================
 if [[ -f "$HOME/.x-cmd.root/X" ]]; then
     . "$HOME/.x-cmd.root/X" &>/dev/null
     alias x="___x_cmd"
-    alias c='x cd'
+    # c 原映射 x cd，现改为 zoxide（模糊跳转更可靠，且自动学习普通 cd）
+    alias c='z'
 fi
 
 # ==============================
