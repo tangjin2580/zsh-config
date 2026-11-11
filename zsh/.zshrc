@@ -58,10 +58,10 @@ fi
 # ==============================
 # 插件：语法高亮 & 自动建议（须在 atuin 之前加载）
 # ==============================
-[ -s /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -s /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -s $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && \
+    source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -s $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && \
+    source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ==============================
 # Atuin 历史命令（仅 Ctrl+R 触发，不占用 ↑↓）
@@ -201,23 +201,23 @@ autoload -Uz compinit && compinit -u
 path=("$HOME/.mavis/bin" $path)
 
 # bun completions
-[ -s "/Users/Mr.li/.bun/_bun" ] && source "/Users/Mr.li/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # ==============================
-# 中文 man 手册（man-pages-zh，装在 /opt/homebrew/share/man/zh_CN）
+# 中文 man 手册（man-pages-zh，装在 $HOMEBREW_PREFIX/share/man/zh_CN）
 # 用法：cman <命令>   例：cman ls
 # 说明：仅在调用时把 LANG 切到 zh_CN.UTF-8，不影响全局会话；
 #       MANPATH 末尾的冒号表示追加系统默认 man 路径，作为英文回退；
-#       显式带上 /opt/homebrew/share/man 让 Homebrew 命令（如 git）的
+#       显式带上 $HOMEBREW_PREFIX/share/man 让 Homebrew 命令（如 git）的
 #       英文页也能回退。若想让 `man` 默认显示中文，可加 alias man='cman'。
 # ==============================
 cman() {
     LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8 \
-    MANPATH=/opt/homebrew/share/man/zh_CN:/opt/homebrew/share/man: \
+    MANPATH=$HOMEBREW_PREFIX/share/man/zh_CN:$HOMEBREW_PREFIX/share/man: \
     command man "$@"
 }
 

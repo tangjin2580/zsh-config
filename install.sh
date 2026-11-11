@@ -14,7 +14,9 @@ brew bundle --file="$DOTFILES/Brewfile"
 
 echo ""
 echo "==> 2/5 创建配置软链接..."
-ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
+ln -sf "$DOTFILES/zsh/.zshrc"   "$HOME/.zshrc"
+ln -sf "$DOTFILES/zsh/.zprofile" "$HOME/.zprofile"
+ln -sf "$DOTFILES/zsh/.zshenv"  "$HOME/.zshenv"
 mkdir -p "$HOME/Library/Application Support/tealdeer"
 ln -sf "$DOTFILES/tealdeer/config.toml" "$HOME/Library/Application Support/tealdeer/config.toml"
 
