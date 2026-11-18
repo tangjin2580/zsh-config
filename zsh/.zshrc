@@ -49,10 +49,14 @@ export CLICOLOR=1
 export LSCOLORS=ExGxFxdaCxDaDahbadeche
 
 # ==============================
-# oh-my-posh 主题
+# oh-my-posh 主题（standalone 安装：二进制在 ~/.local/bin，主题在 ~/.config/oh-my-posh）
+# 不再依赖 brew --prefix（brew 版已卸载，避免版本混乱）
 # ==============================
 if command -v oh-my-posh >/dev/null 2>&1; then
-    eval "$(oh-my-posh init zsh --config "$(brew --prefix oh-my-posh)/themes/atomic.omp.json")"
+    OMP_CONFIG="${OH_MY_POSH_CONFIG:-$HOME/.config/oh-my-posh/themes/atomic.omp.json}"
+    if [[ -f "$OMP_CONFIG" ]]; then
+        eval "$(oh-my-posh init zsh --config "$OMP_CONFIG")"
+    fi
 fi
 
 # ==============================

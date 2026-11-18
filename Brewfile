@@ -6,7 +6,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask", "https://mirrors.ustc.edu.cn/homebrew-cask.git"
 tap "homebrew/core"
 tap "homebrew/services", "https://mirrors.ustc.edu.cn/homebrew-services.git"
-tap "jandedobbeleer/oh-my-posh"
 tap "lihaoyun6/tap"
 tap "mongodb/brew"
 tap "playcover/playcover"
@@ -94,8 +93,7 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # Shell extension to jump to frequently used directories（zoxide，替代原 x-cmd 的 c 跳转）
 brew "zoxide"
-# Cross-shell prompt engine（oh-my-posh 主题）
-brew "oh-my-posh"
+# oh-my-posh 用官方 standalone 安装（见 install.sh），不走 brew，避免版本混乱
 
 go "github.com/go-delve/delve/cmd/dlv"
 go "unlock-music.dev/cli/cmd/um"
